@@ -75,8 +75,10 @@ function calc(){
             displayDetails(details);
         }
     }else{
+        details = ""
         error="Enter the meal value and attendees number"
-        display(error)
+        display(error);
+        displayDetails(details);
     }
 
 }
