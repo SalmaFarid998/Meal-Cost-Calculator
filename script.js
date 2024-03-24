@@ -3,6 +3,7 @@ let attendees = Number(document.getElementById('attendees').value)
 let service = document.getElementById('service')
 let excel = document.getElementById('excel')
 let resultBox = document.getElementById('result')
+let detailsBox = document.getElementById('details')
 let form = document.getElementById("form")
 form.addEventListener("submit", function(e){e.preventDefault()})
 form.addEventListener("click", calc)
@@ -27,6 +28,9 @@ function checkState(x){
 function display(result){
     resultBox.innerHTML= `${result}`
 }
+function displayDetails(details){
+    detailsBox.innerHTML = `${details}`
+}
 
 function calc(){
     resultBox.innerHTML= ""
@@ -39,26 +43,36 @@ function calc(){
         if(checkState(service)==true&&checkState(excel)==true){
             result= attendees*rate*1.14+attendees*rate*0.12
             if(result*0.056>285){
+                details = `Meals: ${attendees*rate}, VAT: ${Math.trunc(attendees*rate*0.14)}, Service: ${Math.ceil(attendees*rate*0.12)}, EXCEL: ${Math.ceil(result*0.056)}`
                 result= Math.ceil(result*1.056)
             }else{
+                details = `Meals: ${attendees*rate}, VAT: ${Math.trunc(attendees*rate*0.14)}, Service: ${Math.ceil(attendees*rate*0.12)}, EXCEL: 285`
                 result = Math.ceil(result + 285)
             }
-            display(result)
+            display(result);
+            displayDetails(details);
         }else if(checkState(service)==true&& checkState(excel)==false){
+            details = `Meals: ${attendees*rate}, VAT: ${Math.trunc(attendees*rate*0.14)}, Service: ${Math.ceil(attendees*rate*0.12)}`
             result= Math.ceil(attendees*rate*1.14+attendees*rate*0.12)
-            display(result)
+            display(result);
+            displayDetails(details);
         }else if(checkState(service)==false && checkState(excel)==true){
             result= attendees*rate*1.14
             
             if(result*0.056>285){
+                details = `Meals: ${attendees*rate}, VAT: ${Math.trunc(attendees*rate*0.14)}, EXCEL: ${Math.ceil(result*0.056)}`
                 result= Math.ceil(result*1.056)
             }else{
+                details = `Meals: ${attendees*rate}, VAT: ${Math.trunc(attendees*rate*0.14)}, EXCEL: 285`
                 result = Math.ceil(result + 285)
             }
-            display(result)
+            display(result);
+            displayDetails(details);
         }else{
+            details = `Meals: ${attendees*rate}, VAT: ${Math.trunc(attendees*rate*0.14)}`
             result= Math.ceil(attendees*rate*1.14)
-            display(result)
+            display(result);
+            displayDetails(details);
         }
     }else{
         error="Enter the meal value and attendees number"
