@@ -60,12 +60,12 @@ function calc(){
         
         if (checkState(excel)){
             excelValue = 0.05
-            if (pureRate*(1+serviceValue)*0.05>285){
+            if (pureRate*(1+serviceValue)*0.05>570){
                 result = Math.trunc(pureRate*(1+vatValue)*(1+serviceValue)*(1+excelValue))
                 excelAmount = pureRate*(1+serviceValue)*0.05
             }else{
-                result = Math.trunc(((pureRate*(1+serviceValue))+250)*(1+vatValue))
-                excelAmount = 250
+                result = Math.trunc(((pureRate*(1+serviceValue))+500)*(1+vatValue))
+                excelAmount = 500
             }
         }else{
             excelValue = 0
